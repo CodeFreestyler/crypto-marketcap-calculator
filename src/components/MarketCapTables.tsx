@@ -18,6 +18,7 @@ export interface MarketCapTablesProps {
   calculateRanking: () => string | number;
   desiredPrice: string;
   probability: number | null;
+  holdings: number | null; // New prop to accept user holdings
 }
 
 const MarketCapTables: React.FC<MarketCapTablesProps> = ({
@@ -25,13 +26,18 @@ const MarketCapTables: React.FC<MarketCapTablesProps> = ({
   currentMarketCap,
   currentPrice,
   totalMarketCap,
-  topCryptos,
   calculateRanking,
   desiredPrice,
   probability,
+  holdings,
 }) => {
+  // Calculate the future holding value
+  const futureHoldingValue =
+    holdings && desiredPrice ? (holdings * parseFloat(desiredPrice)).toFixed(2) : 'N/A';
+
   return (
     <div>
+      {/* Ranking Information */}
       <h3>Ranking Information</h3>
       <table className="market-cap-table">
         <tbody>
@@ -42,6 +48,7 @@ const MarketCapTables: React.FC<MarketCapTablesProps> = ({
         </tbody>
       </table>
 
+      {/* Market Cap Information */}
       <h3>Market Cap Information</h3>
       <table className="market-cap-table">
         <tbody>
@@ -81,6 +88,17 @@ const MarketCapTables: React.FC<MarketCapTablesProps> = ({
               <td colSpan={2}>We can't provide market cap information right now</td>
             </tr>
           )}
+        </tbody>
+      </table>
+
+      {/* Future Holding Value */}
+      <h3>Future Holding Value</h3>
+      <table className="market-cap-table">
+        <tbody>
+          <tr>
+            <td>Future Holding Value:</td>
+            <td>{futureHoldingValue !== 'N/A' ? `$${futureHoldingValue}` : 'N/A'}</td>
+          </tr>
         </tbody>
       </table>
     </div>
