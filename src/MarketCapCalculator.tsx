@@ -1,5 +1,3 @@
-// MarketCapCalculator.tsx
-
 import React, { useState, useEffect } from 'react';
 import {
   getTokenData,
@@ -41,6 +39,7 @@ const MarketCapCalculator: React.FC = () => {
   const [tokenSymbol, setTokenSymbol] = useState<string>('SUI');
   const [desiredPrice, setDesiredPrice] = useState<string>('');
   const [desiredMarketCap, setDesiredMarketCap] = useState<string>('');
+  const [holdings, setHoldings] = useState<string>(''); // New state for user holdings
   const [marketCap, setMarketCap] = useState<number | null>(null);
   const [currentMarketCap, setCurrentMarketCap] = useState<number | null>(null);
   const [currentPrice, setCurrentPrice] = useState<number | null>(null);
@@ -181,6 +180,18 @@ const MarketCapCalculator: React.FC = () => {
         setDesiredPrice={setDesiredPrice}
       />
 
+      {/* Holdings Input */}
+      <div>
+        <label>
+          Your Holdings (Number of Tokens):
+          <input
+            type="number"
+            value={holdings}
+            onChange={(e) => setHoldings(e.target.value)}
+          />
+        </label>
+      </div>
+
       <ProbabilityOptions
         probabilityEnabled={probabilityEnabled}
         setProbabilityEnabled={setProbabilityEnabled}
@@ -201,6 +212,7 @@ const MarketCapCalculator: React.FC = () => {
         calculateRanking={calculateRanking}
         desiredPrice={desiredPrice}
         probability={probability}
+        holdings={parseFloat(holdings)} // Pass holdings as a number
       />
     </div>
   );

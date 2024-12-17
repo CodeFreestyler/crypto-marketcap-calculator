@@ -87,10 +87,28 @@
     border-collapse: collapse;
   }
   
-  .market-cap-table td {
-    padding: 10px;
-    border: 1px solid #ccc;
+  .market-cap-table td, .market-cap-table th {
+    padding: 10px; /* Consistent padding */
+    border: 1px solid #ccc; /* Consistent border */
+    text-align: left; /* Align all content to the left */
+    vertical-align: middle; /* Align vertically in the middle */
+    box-sizing: border-box; /* Prevent overflow due to padding */
   }
+  
+  /* Apply consistent column width */
+  .market-cap-table td:first-child, .market-cap-table th:first-child {
+    width: 70%; /* Adjust as needed for label column */
+  }
+  
+  .market-cap-table td:last-child, .market-cap-table th:last-child {
+    width: 30%; /* Adjust as needed for value column */
+  }
+  
+  /* Add some breathing room at the bottom of each table */
+  .market-cap-table + .market-cap-table {
+    margin-top: 20px;
+  }
+  
 
   /* Align probability options container */
 .probability-options-container {
